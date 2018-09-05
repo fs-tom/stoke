@@ -1,6 +1,6 @@
 ;;This should be renamed. Currently exists in futures.clj Currently a draft
 ;;namespace for the libaries that extend the simple stoke processor from
-;;marathon.processing.stoke.core . As it turns out, there are a couple of
+;;stoke.core . As it turns out, there are a couple of
 ;;business rules that drastically increase the complexity of the problem
 ;;specification even for the beer-math version of stoke. As a consequence, I
 ;;have opted to use a general mincost network flow optimization to generate
@@ -804,11 +804,11 @@
               (add-supply acc src compo quantity))) supply fills))
 )
 (comment
-(require 'marathon.processing.stoke.app)
+(require 'stoke.app)
 (def the-path "C:\\Users\\thomas.spoon\\Documents\\stochdemand\\stoke-beta\\FMCA450.stoke-acfirst.xlsx")
 (def the-project (read-project the-path))
 (def the-demand-path "C:\\Users\\thomas.spoon\\Documents\\stochdemand\\stoke-beta\\cases\\case1\\peaks\\")
-(def the-demands (marathon.processing.stoke.app/folder->demand-stream the-demand-path))
+(def the-demands (stoke.app/folder->demand-stream the-demand-path))
 (def the-demand (first the-demands))
 (def tiny-demand (take 1  the-demand))
 (def test-demand (map #(assoc % :Quantity 300000) tiny-demand))
@@ -819,8 +819,8 @@
 ;;fill flower.  Ran out of time.  Infrastructure is in place...
 (comment
 
-(defn ^marathon.processing.stoke.arrayflow enable-demand-sources!
-  [^marathon.processing.stoke.arrayflow net]
+(defn ^stoke.arrayflow enable-demand-sources!
+  [^stoke.arrayflow net]
   (let [bound (.n net)
         demand-id (unchecked-dec (unchecked-dec bound))]
     (loop [source 0]
@@ -830,8 +830,8 @@
                     (aflow/enable-edge! source demand-id))
                   (recur (unchecked-inc source))))))))
 
-(defn ^marathon.processing.stoke.arrayflow disable-sources!
-  [^marathon.processing.stoke.arrayflow net ^objects sources]
+(defn ^stoke.arrayflow disable-sources!
+  [^stoke.arrayflow net ^objects sources]
   (let [bound (alength sources)
         demand-id (unchecked-dec (unchecked-dec bound))]
     (loop [idx 0]

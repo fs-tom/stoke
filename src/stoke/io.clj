@@ -112,13 +112,13 @@
 
 ;;__Temporary Patch__
 (defn samples->decile-table
-  "This is a variation of marathon.processing.stoke.core/performance-table."
+  "This is a variation of stoke.core/performance-table."
   [src-counts]
   (let [as-percentile (memoize
                        (fn [n] (keyword (str (* (inc n) 10) "th_Percentile"))))
         ordered-fields (into [:src] (map as-percentile  (range 9)))
         expand-record (fn [[k xs]]
-                        (->> (marathon.processing.stoke.core/fixed-deciles xs)
+                        (->> (stoke.core/fixed-deciles xs)
                              (map-indexed (fn [idx v] [(as-percentile idx) v]))
                              (into {:src k})))
         _             (println [:building :table])]

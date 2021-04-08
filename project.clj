@@ -5,4 +5,4 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [spork "0.2.1.4-SNAPSHOT"]
-                 [marathon-schemas "4.1.6-SNAPSHOT"]])
+                 [marathon-schemas "4.1.7-SNAPSHOT"]])
